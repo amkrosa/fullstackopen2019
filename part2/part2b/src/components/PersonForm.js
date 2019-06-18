@@ -1,16 +1,11 @@
 import React from 'react'
 
-const PersonForm = ({addPerson, name, handleNameChange, number, handleNumberChange}) => {
+const PersonForm = (props) => {
     
     return(
     <div>
-        <form onSubmit={addPerson}>
-        <div>
-          name: <input type='text' value={name} onChange={handleNameChange} required/>
-        </div>
-        <div>
-          phone: <input type='number' value={number} onChange={handleNumberChange} required/>
-        </div>
+        <form onSubmit={props.addPerson}>
+          {props.children}
         <div>
           <button type="submit">add</button>
         </div>
@@ -20,3 +15,6 @@ const PersonForm = ({addPerson, name, handleNameChange, number, handleNumberChan
 }
 
 export default PersonForm
+
+//<PersonField name='name' value={name} onChange={handleNameChange}/>
+//<PersonField name='phone' value={number} onChange={handleNumberChange}/>
