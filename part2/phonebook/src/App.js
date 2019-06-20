@@ -1,23 +1,29 @@
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import PersonForm from './components/PersonForm'
 import PhoneBook from './components/PhoneBook'
 import Filter from './components/Filter'
 import PersonField from './components/PersonField'
+import axios from 'axios'
 
 const App = () => {
 
   const [ state, updateState ] = useReducer(
     (state, newState) => ({...state, ...newState}),
-    {name: '', number: '', filter: '', persons: [
-      { id: 1, name: 'Arto Hellas', phone: '040123456' },
-      { id: 2, name: 'Ada Lovelace', phone: '3944-5323523' },
-      { id: 3, name: 'Dan Abramov', phone: '1243-234345' },
-      { id: 4, name: 'Mary Poppendieck', phone: '39-23-6423122'}
-    ], filteredPersons: []}
+    {name: '', number: '', filter: '', persons: [], filteredPersons: []}
   )
 
   const { name, number, filter, persons, filteredPersons } = state
 
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        updateState( { persons: response.data } )
+      })
+  }, [])
+  
   const addPerson = (event) => {
     event.preventDefault()
     const newObject = {

@@ -15,6 +15,3 @@ const PersonForm = (props) => {
 }
 
 export default PersonForm
-
-//<PersonField name='name' value={name} onChange={handleNameChange}/>
-//<PersonField name='phone' value={number} onChange={handleNumberChange}/>
